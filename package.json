@@ -31,5 +31,14 @@
   },
   "dependencies": {
     "@merryjs/swagger": "^1.1.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/merryjs/merry-plugin-swagger.git"
+  },
+  "author": "bang88",
+  "bugs": {
+    "url": "https://github.com/merryjs/merry-plugin-swagger/issues"
+  },
+  "homepage": "https://github.com/merryjs/merry-plugin-swagger#readme"
 }
