@@ -26,6 +26,10 @@ export default (api: Plugin) => {
     .option('-T, --tpl [value]', 'Provide your template if needed')
     .option('-E, --ext [value]', 'file extension defaults to .ts')
     .action(async (name: string, options: SwaggerOptions) => {
+      if (!options) {
+        api.outputHelp()
+        return
+      }
       if (!options.dist) {
         api.log('The dist param are required so swagger can write to')
         api.outputHelp()
