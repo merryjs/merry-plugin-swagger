@@ -6,3 +6,5 @@
 {{parameters}}
 {{/this}}
 {{/each}}
+
+// Your Ajax request
