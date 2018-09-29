@@ -54,6 +54,24 @@ export default (api: Plugin) => {
           if (options.pattern && new RegExp(options.pattern, 'i').test(key)) {
             continue
           }
+          // export interface GenerateResult {
+          // 	responses: string
+          // 	parameters: string
+          // 	path: string
+          // 	summary?: string
+          // 	definitionEntityName?: string
+          // 	definitionParamsName?: string
+          // 	operation: string
+          // }
+          // const actions = {
+          // 	isGet,
+          // 	isPut,
+          // 	isPost,
+          // 	isDelete,
+          // 	isOptions,
+          // 	isHead,
+          // 	isPatch,
+          // }
           await api.tmplWithFormat(
             tpl,
             path.join(
