@@ -47,7 +47,7 @@ export default (api: Plugin) => {
 
       let tpl = './api.tpl'
       if (options.tpl) {
-        tpl = fs.readFileSync(path.join(process.cwd(), options.tpl), 'utf-8')
+        tpl = path.join(process.cwd(), options.tpl)
       }
       for (const key in result) {
         if (result.hasOwnProperty(key)) {
