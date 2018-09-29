@@ -72,7 +72,9 @@ export default (api: Plugin) => {
           // 	isHead,
           // 	isPatch,
           // }
-          const paths = key.split('/')
+          const paths = key.startsWith('/')
+            ? key.substr(1).split('/')
+            : key.split('/')
           let folder = ''
           let p = ''
           if (paths.length > 1) {
