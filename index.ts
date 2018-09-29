@@ -72,12 +72,24 @@ export default (api: Plugin) => {
           // 	isHead,
           // 	isPatch,
           // }
+          const paths = key.split('/')
+          let folder = ''
+          let p = ''
+          if (paths.length > 1) {
+            folder = paths[0]
+            p = paths.filter((_, index) => index !== 0).join('/')
+          } else {
+            p = key
+          }
+          const fullPath =
+            (folder ? changeCase.snakeCase(folder) + '/' : '') +
+            changeCase.snakeCase(p)
           await api.tmplWithFormat(
             tpl,
             path.join(
               api.conf.dist,
               options.dist,
-              `${changeCase.snakeCase(key)}.${options.ext || 'ts'}`
+              `${fullPath}.${options.ext || 'ts'}`
             ),
             { definitions: result[key] },
             { parser: 'typescript' }
