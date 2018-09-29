@@ -15,16 +15,16 @@ export interface SwaggerOptions {
   pattern?: string
   dist: string
   tpl: string
-  ext: '.ts' | '.tsx'
+  ext: string
 }
 export default (api: Plugin) => {
   api
-    .command('swagger')
+    .command('swagger [name]')
     .option('-A, --api [value]', 'swagger api')
     .option('-P, --pattern [value]', 'filter path by pattern')
     .option('-D, --dist [value]', 'file writes to')
     .option('-T, --tpl [value]', 'Provide your template if needed')
-    .option('-E, --ext [value]', 'file extension defaults to .ts')
+    .option('-E, --ext [value]', 'file extension without [.] defaults to ts')
     .action(async (name: string, options: SwaggerOptions) => {
       if (!options) {
         api.outputHelp()
@@ -59,7 +59,7 @@ export default (api: Plugin) => {
             path.join(
               api.conf.dist,
               options.dist,
-              `${changeCase.pathCase(key)}${options.ext || '.ts'}`
+              `${changeCase.snakeCase(key)}.${options.ext || 'ts'}`
             ),
             { definitions: result[key] },
             { parser: 'typescript' }

@@ -15,13 +15,13 @@
     "precommit": "pretty-quick --staged"
   },
   "devDependencies": {
-    "@merryjs/cli": "1.8.0",
+    "@merryjs/cli": "1.8.2",
     "@types/debug": "^0.0.30",
     "@types/diff": "^3.2.2",
     "@types/fs-extra": "^5.0.1",
     "@types/handlebars": "^4.0.36",
     "@types/inquirer": "^0.0.43",
-    "@types/node": "^10.11.2",
+    "@types/node": "^10.11.3",
     "@types/prettier": "^1.10.0",
     "@types/swagger-parser": "^4.0.2",
     "husky": "^1.0.1",

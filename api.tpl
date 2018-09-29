@@ -1,10 +1,13 @@
 {{#each definitions}}
 {{#this}}
-// {{summary}}
-// {{path}}
-{{responses}}
-{{parameters}}
+/**
+ * {{summary}}
+ */
+{{{responses}}}
+
+/**
+ * {{summary}}
+ */
+{{{parameters}}}
 {{/this}}
 {{/each}}
-
-// Your Ajax request
