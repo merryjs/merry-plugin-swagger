@@ -74,20 +74,7 @@ export default (api: Plugin) => {
           // 	isHead,
           // 	isPatch,
           // }
-          const paths = key.startsWith('/')
-            ? key.substr(1).split('/')
-            : key.split('/')
-          let folder = ''
-          let p = ''
-          if (paths.length > 1) {
-            folder = paths[0]
-            p = paths.filter((_, index) => index !== 0).join('/')
-          } else {
-            p = key
-          }
-          const fullPath =
-            (folder ? changeCase.snakeCase(folder) + '/' : '') +
-            changeCase.snakeCase(p)
+          const fullPath = getFullPath(key)
           await api.tmplWithFormat(
             tpl,
             path.join(
@@ -104,7 +91,7 @@ export default (api: Plugin) => {
         try {
           const f = require(path.join(process.cwd(), options.file))
           if (typeof f === 'function') {
-            f(result, { api, changeCase, options })
+            f(result, { api, changeCase, options, getFullPath })
           }
         } catch (error) {
           api.log('Can not call file from %s', options.file)
@@ -112,4 +99,18 @@ export default (api: Plugin) => {
         }
       }
     })
+}
+function getFullPath(key: string) {
+  const paths = key.startsWith('/') ? key.substr(1).split('/') : key.split('/')
+  let folder = ''
+  let p = ''
+  if (paths.length > 1) {
+    folder = paths[0]
+    p = paths.filter((_, index) => index !== 0).join('/')
+  } else {
+    p = key
+  }
+  const fullPath =
+    (folder ? changeCase.snakeCase(folder) + '/' : '') + changeCase.snakeCase(p)
+  return fullPath
 }
