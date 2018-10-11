@@ -16,6 +16,7 @@ export interface SwaggerOptions {
   dist: string
   tpl: string
   ext: string
+  file: string
 }
 export default (api: Plugin) => {
   api
@@ -25,6 +26,7 @@ export default (api: Plugin) => {
     .option('-D, --dist [value]', 'file writes to')
     .option('-T, --tpl [value]', 'Provide your template if needed')
     .option('-E, --ext [value]', 'file extension without [.] defaults to ts')
+    .option('-F, --file [value]', 'execute file if provided')
     .action(async (name: string, options: SwaggerOptions) => {
       if (!options) {
         api.outputHelp()
@@ -96,6 +98,17 @@ export default (api: Plugin) => {
             { definitions: result[key] },
             { parser: 'typescript' }
           )
+        }
+      }
+      if (options.file && fs.existsSync(options.file)) {
+        try {
+          const f = require(path.join(process.cwd(), options.file))
+          if (typeof f === 'function') {
+            f(result, { api, changeCase, options })
+          }
+        } catch (error) {
+          api.log('Can not call file from %s', options.file)
+          console.error(error)
         }
       }
     })
