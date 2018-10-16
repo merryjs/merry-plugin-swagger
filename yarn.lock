@@ -30,9 +30,9 @@
     resolve-pkg "^1.0.0"
     tslib "^1.9.0"
 
-"@merryjs/swagger@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@merryjs/swagger/-/swagger-1.2.0.tgz#7f789ca5acd3356206682ecc6acd225d1bfbdf44"
+"@merryjs/swagger@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@merryjs/swagger/-/swagger-1.3.0.tgz#338d1ad03a47a7fdafc34d31cf47b1ba65c84b40"
   dependencies:
     change-case "^3.0.2"
     fs-extra "^7.0.0"
