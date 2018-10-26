@@ -31,10 +31,10 @@
     resolve-pkg "^1.0.0"
     tslib "^1.9.0"
 
-"@merryjs/swagger@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@merryjs/swagger/-/swagger-1.3.1.tgz#69f2e055bf2b1778b5926033549ff005af12ade2"
-  integrity sha512-GaZgcRvlluMUxMuSp3bhhaZgi3cgvqf4PyPRrtjHsd8+ExuoWg8Z5bD6aPrLYgvZ+r+BG6Jfcy5KxrXsRhNb/g==
+"@merryjs/swagger@^1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@merryjs/swagger/-/swagger-1.3.2.tgz#e3bcf1f704a0145a95295e8d1bf037c392dde2f6"
+  integrity sha512-qncOZRrVDJ4L9Njo/KH6Dv2nWGuC26pN3j/nr3Pjzsagaogs7VEBAsY3YzkInq/grjnq0fM8o5CRm7WhgZVFDQ==
   dependencies:
     change-case "^3.0.2"
     fs-extra "^7.0.0"
