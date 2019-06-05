@@ -1,5 +1,5 @@
 import { Plugin } from '@merryjs/cli/lib/plugin'
-import { generatePaths } from '@merryjs/swagger'
+import { generatePaths, GenerateResult } from '@merryjs/swagger'
 import changeCase from 'change-case'
 import fs from 'fs-extra'
 import path from 'path'
@@ -17,6 +17,10 @@ export interface SwaggerOptions {
   tpl: string
   ext: string
   file: string
+  /**
+   * clean dist folder
+   */
+  clean_stores?: boolean
 }
 export default (api: Plugin) => {
   api
@@ -27,6 +31,7 @@ export default (api: Plugin) => {
     .option('-T, --tpl [value]', 'Provide your template if needed')
     .option('-E, --ext [value]', 'file extension without [.] defaults to ts')
     .option('-F, --file [value]', 'execute file if provided')
+    .option('-C, --clean_stores', 'clean stores')
     .action(async (name: string, options: SwaggerOptions) => {
       if (!options) {
         api.outputHelp()
@@ -43,7 +48,11 @@ export default (api: Plugin) => {
         return
       }
 
-      const result = await generatePaths(options.api, {
+      if (options.clean_stores) {
+        api.fs.emptyDirSync(`${api.conf.dist}/${options.dist}`)
+      }
+
+      const resultOfDefinitions = await generatePaths(options.api, {
         definitionName: '{path}',
       })
 
@@ -51,6 +60,15 @@ export default (api: Plugin) => {
       if (options.tpl) {
         tpl = path.join(process.cwd(), options.tpl)
       }
+      // filter by key
+      const resultWithPattern = Object.keys(resultOfDefinitions).filter(
+        key => !(options.pattern && new RegExp(options.pattern, 'gi').test(key))
+      )
+      const result: {
+        [key: string]: GenerateResult[]
+      } = {}
+      resultWithPattern.forEach(key => (result[key] = resultOfDefinitions[key]))
+
       for (const key in result) {
         if (result.hasOwnProperty(key)) {
           if (options.pattern && new RegExp(options.pattern, 'gi').test(key)) {
