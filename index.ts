@@ -53,7 +53,7 @@ export default (api: Plugin) => {
       }
       for (const key in result) {
         if (result.hasOwnProperty(key)) {
-          if (options.pattern && new RegExp(options.pattern, 'i').test(key)) {
+          if (options.pattern && new RegExp(options.pattern, 'gi').test(key)) {
             continue
           }
           // export interface GenerateResult {
