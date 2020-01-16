@@ -21,6 +21,7 @@ export interface SwaggerOptions {
    * clean dist folder
    */
   clean_stores?: boolean
+  custom_api?: boolean
 }
 export default (api: Plugin) => {
   api
@@ -32,6 +33,8 @@ export default (api: Plugin) => {
     .option('-E, --ext [value]', 'file extension without [.] defaults to ts')
     .option('-F, --file [value]', 'execute file if provided')
     .option('-C, --clean_stores', 'clean stores')
+    .option('-U, --custom_api', 'custom api')
+
     .action(async (name: string, options: SwaggerOptions) => {
       if (!options) {
         api.outputHelp()
@@ -67,44 +70,53 @@ export default (api: Plugin) => {
       const result: {
         [key: string]: GenerateResult[]
       } = {}
-      resultWithPattern.forEach(key => (result[key] = resultOfDefinitions[key]))
-
-      for (const key in result) {
-        if (result.hasOwnProperty(key)) {
-          if (options.pattern && new RegExp(options.pattern, 'gi').test(key)) {
-            continue
+      resultWithPattern.forEach(key => {
+        if (!(options.pattern && new RegExp(options.pattern, 'gi').test(key))) {
+          result[key] = resultOfDefinitions[key]
+        }
+      })
+      if (!options.custom_api) {
+        for (const key in result) {
+          if (result.hasOwnProperty(key)) {
+            if (
+              options.pattern &&
+              new RegExp(options.pattern, 'gi').test(key)
+            ) {
+              continue
+            }
+            // export interface GenerateResult {
+            // 	responses: string
+            // 	parameters: string
+            // 	path: string
+            // 	summary?: string
+            // 	definitionEntityName?: string
+            // 	definitionParamsName?: string
+            // 	operation: string
+            // }
+            // const actions = {
+            // 	isGet,
+            // 	isPut,
+            // 	isPost,
+            // 	isDelete,
+            // 	isOptions,
+            // 	isHead,
+            // 	isPatch,
+            // }
+            const fullPath = getFullPath(key)
+            await api.tmplWithFormat(
+              tpl,
+              path.join(
+                api.conf.dist,
+                options.dist,
+                `${fullPath}.${options.ext || 'ts'}`
+              ),
+              { definitions: result[key] },
+              { parser: 'typescript' }
+            )
           }
-          // export interface GenerateResult {
-          // 	responses: string
-          // 	parameters: string
-          // 	path: string
-          // 	summary?: string
-          // 	definitionEntityName?: string
-          // 	definitionParamsName?: string
-          // 	operation: string
-          // }
-          // const actions = {
-          // 	isGet,
-          // 	isPut,
-          // 	isPost,
-          // 	isDelete,
-          // 	isOptions,
-          // 	isHead,
-          // 	isPatch,
-          // }
-          const fullPath = getFullPath(key)
-          await api.tmplWithFormat(
-            tpl,
-            path.join(
-              api.conf.dist,
-              options.dist,
-              `${fullPath}.${options.ext || 'ts'}`
-            ),
-            { definitions: result[key] },
-            { parser: 'typescript' }
-          )
         }
       }
+
       if (options.file && fs.existsSync(options.file)) {
         try {
           const f = require(path.join(process.cwd(), options.file))

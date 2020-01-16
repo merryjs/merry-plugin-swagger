@@ -31,10 +31,10 @@
     resolve-pkg "^1.0.0"
     tslib "^1.9.0"
 
-"@merryjs/swagger@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@merryjs/swagger/-/swagger-1.4.0.tgz#6ef565f13954664b622f6387da43aab6cc91f793"
-  integrity sha512-/EMq8jQsh0B7n4WNJK7DoY3ZrqcWHcWIBpU19cyOpBUlSQeGNeaMj6dOkKeNu3ZsueNqUT+du0XZa0mmHhgRQA==
+"@merryjs/swagger@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@merryjs/swagger/-/swagger-1.4.1.tgz#426f0580d11e75f583efe6ab5a493859b4a1e11d"
+  integrity sha512-cezyvSaOL5MjvRs0MntgLiaYvmv6JhdzrriWw5JYOVkbAlQckkCcu1C/WhNWPFJLM734XzBsmP86jCKtaXC6SQ==
   dependencies:
     change-case "^3.0.2"
     fs-extra "^7.0.0"
@@ -59,9 +59,11 @@
     "@types/node" "*"
 
 "@types/handlebars@^4.0.36":
-  version "4.0.39"
-  resolved "https://registry.yarnpkg.com/@types/handlebars/-/handlebars-4.0.39.tgz#961fb54db68030890942e6aeffe9f93a957807bd"
-  integrity sha512-vjaS7Q0dVqFp85QhyPSZqDKnTTCemcSHNHFvDdalO1s0Ifz5KuE64jQD5xoUkfdWwF4WpqdJEl7LsWH8rzhKJA==
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@types/handlebars/-/handlebars-4.1.0.tgz#3fcce9bf88f85fe73dc932240ab3fb682c624850"
+  integrity sha512-gq9YweFKNNB1uFK71eRqsd4niVkXrxHugqWFQkeLRJvGjnxsLr16bYtcsG4tOFwmYi0Bax+wCkbf1reUfdl4kA==
+  dependencies:
+    handlebars "*"
 
 "@types/inquirer@^0.0.43":
   version "0.0.43"
@@ -1244,6 +1246,17 @@ handlebars-utils@^1.0.2, handlebars-utils@^1.0.4, handlebars-utils@^1.0.6:
     kind-of "^6.0.0"
     typeof-article "^0.1.1"
 
+handlebars@*:
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.7.2.tgz#01127b3840156a0927058779482031afe0e730d7"
+  integrity sha512-4PwqDL2laXtTWZghzzCtunQUTLbo31pcCJrd/B/9JP8XbhVzpS5ZXuKqlOzsd1rtcaLo4KqAn8nl8mkknS4MHw==
+  dependencies:
+    neo-async "^2.6.0"
+    optimist "^0.6.1"
+    source-map "^0.6.1"
+  optionalDependencies:
+    uglify-js "^3.1.4"
+
 handlebars@^4.0.11, handlebars@^4.0.12:
   version "4.0.12"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.12.tgz#2c15c8a96d46da5e266700518ba8cb8d919d5bc5"
@@ -1965,6 +1978,11 @@ nanomatch@^1.2.9:
     regex-not "^1.0.0"
     snapdragon "^0.8.1"
     to-regex "^3.0.1"
+
+neo-async@^2.6.0:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
+  integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
 nested-error-stacks@~2.0.1:
   version "2.0.1"

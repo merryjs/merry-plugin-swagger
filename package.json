@@ -1,6 +1,6 @@
 {
   "name": "merry-plugin-swagger",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "main": "index.js",
   "license": "MIT",
   "description": "generate code from swagger ",
@@ -30,7 +30,7 @@
     "typescript": "^3.1.1"
   },
   "dependencies": {
-    "@merryjs/swagger": "^1.4.0"
+    "@merryjs/swagger": "^1.4.1"
   },
   "repository": {
     "type": "git",
